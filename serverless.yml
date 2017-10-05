@@ -1,0 +1,30 @@
+service: s3-upload
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-east-1
+  environment:
+    SOURCE_BUCKET_NAME: ${env:SOURCE_BUCKET_NAME}
+    TARGET_BUCKET_NAME: ${env:TARGET_BUCKET_NAME}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
+
+package:
+  exclude:
+    - "**/*"
+    - "!node_modules/**"
+    - "!build/**"
+    - "**/*.spec.js"
+    - "**/*.spec.js.snap"
+
+functions:
+  postprocess:
+    handler: build/handler.postprocess
+    events:
+      - s3:
+          bucket: ${self:provider.environment.SOURCE_BUCKET_NAME}
+          event: s3:ObjectCreated:*

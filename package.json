@@ -1,0 +1,52 @@
+{
+    "name": "s3-upload-image-thumbnails",
+    "version": "1.0.0",
+    "description": "Create automatic thumbnails after uploading images to S3",
+    "scripts": {
+        "lint": "eslint .",
+        "test": "BABEL_ENV=node jest",
+        "transpile": "gulp",
+        "deploy": "npm run transpile && serverless deploy"
+    },
+    "pre-commit": [
+        "lint"
+    ],
+    "jest": {
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/**/*.js",
+            "!**/*.spec.js"
+        ],
+        "coverageReporters": [
+            "lcov",
+            "cobertura",
+            "html"
+        ],
+        "testResultsProcessor": "./node_modules/jest-junit-reporter"
+    },
+    "dependencies": {
+        "aws-sdk": "^2.126.0",
+        "sharp": "^0.18.4",
+        "winston": "^2.3.1"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.16.0",
+        "babel-eslint": "^7.2.3",
+        "babel-jest": "^17.0.0",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-require-ignore": "^0.1.1",
+        "babel-preset-env": "^1.6.0",
+        "eslint": "^4.7.0",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-jest": "^21.1.0",
+        "eslint-plugin-json": "^1.2.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^7.0.0",
+        "gulp-clean": "^0.3.2",
+        "jest": "^17.0.0",
+        "jest-cli": "^17.0.0",
+        "jest-junit-reporter": "^1.1.0",
+        "pre-commit": "^1.2.2",
+        "serverless": "^1.23.0"
+    }
+}
