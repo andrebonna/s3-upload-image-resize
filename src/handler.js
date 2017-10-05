@@ -32,9 +32,9 @@ function resizeAndSave(width, key) {
                 const params = {
                     TableName: process.env.DYNAMODB_TABLE,
                     Item: {
-                        title: headline,
-                        description: caption,
-                        categories: special_instructions && special_instructions.split(',')
+                        Name: headline,
+                        Description: caption,
+                        Categories: special_instructions && special_instructions.split(',')
                     }
                 };
                 return dynamodb.put(params).promise();
