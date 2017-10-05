@@ -5,7 +5,7 @@ Create automatic thumbnails after uploading images to S3
 
 - [NodeJS 6+ installed](https://nodejs.org/en/download/)
 - [AWS account with API credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
-- [Serverless CLI installed](https://serverless.com/framework/docs/providers/aws/guide/installation#installing-the-serverless-framework)
+- EC2 Amazon Linux machine with node >= 6.10 and gcc-c++ installed. You should clone the project inside this machine and npm install it.
 
 
 ## Environment Variables

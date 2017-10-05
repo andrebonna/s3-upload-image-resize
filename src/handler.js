@@ -18,12 +18,13 @@ export function postprocess(event) {
             Bucket: process.env.SOURCE_BUCKET_NAME,
             Key: key
         }).promise()
-            .then((data) => sharp(data.Body).resize(640).toBuffer())
+            .then((data) => sharp(data.Body).resize(640).toFormat('png').toBuffer())
             .then(data => s3.putObject({
                 Bucket: process.env.TARGET_BUCKET_NAME,
-                Key: key + '-640.jpg',
+                Key: key + '-640.png',
+                ContentType: 'image/png',
                 Body: data
-            }))
+            }).promise())
             .then((data) => logger.info('Successfully Saved Image', data))
             .catch(err => logger.error(err, err.stack));
     });
