@@ -12,6 +12,7 @@ Create automatic thumbnails after uploading images to S3
 ```
 SOURCE_BUCKET_NAME: # Define AWS Source S3 bucket name
 TARGET_BUCKET_NAME: # Define AWS Target S3 bucket name
+DYNAMODB_TABLE: # DynamoDB Table to save metadata
 ```
 
 ## Deploy

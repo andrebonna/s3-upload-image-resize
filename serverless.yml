@@ -7,11 +7,17 @@ provider:
   environment:
     SOURCE_BUCKET_NAME: ${env:SOURCE_BUCKET_NAME}
     TARGET_BUCKET_NAME: ${env:TARGET_BUCKET_NAME}
+    DYNAMODB_TABLE: ${env:DYNAMODB_TABLE}
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:*
       Resource: "*"
+
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 package:
   exclude:
