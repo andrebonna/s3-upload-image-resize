@@ -17,6 +17,7 @@ provider:
     - Effect: Allow
       Action:
         - dynamodb:PutItem
+        - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 package:
@@ -28,11 +29,19 @@ package:
     - "**/*.spec.js.snap"
 
 functions:
-  postprocess:
-    handler: build/handler.postprocess
+  create:
+    handler: build/handler.create
     events:
       - s3:
           bucket: ${self:provider.environment.SOURCE_BUCKET_NAME}
           event: s3:ObjectCreated:*
+          rules:
+            - suffix: .jpg
+  remove:
+    handler: build/handler.remove
+    events:
+      - s3:
+          bucket: ${self:provider.environment.SOURCE_BUCKET_NAME}
+          event: s3:ObjectRemoved:*
           rules:
             - suffix: .jpg
