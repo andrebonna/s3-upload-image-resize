@@ -1,7 +1,7 @@
 {
-    "name": "s3-upload-image-thumbnails",
+    "name": "s3-upload-image-resize",
     "version": "1.0.0",
-    "description": "Create automatic thumbnails after uploading images to S3",
+    "description": "Create automatic resized images after uploading to S3",
     "scripts": {
         "lint": "eslint .",
         "test": "BABEL_ENV=node jest",

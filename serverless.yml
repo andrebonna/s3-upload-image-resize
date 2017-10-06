@@ -34,3 +34,5 @@ functions:
       - s3:
           bucket: ${self:provider.environment.SOURCE_BUCKET_NAME}
           event: s3:ObjectCreated:*
+          rules:
+            - suffix: .jpg
