@@ -16,6 +16,10 @@ function getImageKey(width, key) {
     return `${key}-${width}.png`;
 }
 
+function getTargetURLs(widths, key) {
+    return widths.map((width)=> `https://s3.amazonaws.com/${process.env.TARGET_BUCKET_NAME}/${getImageKey(width, key)}`);
+}
+
 function resizeAndSave(width, key) {
     return data => {
         return sharp(data.Body).resize(width).toFormat('png').toBuffer()
@@ -26,23 +30,7 @@ function resizeAndSave(width, key) {
                 ContentType: 'image/png',
                 Body: fileBuffer
             }).promise())
-            .then(() => {
-                logger.debug('Image Saved to target bucket', key);
-                const { headline, caption, special_instructions } = data.iptcMetadata;
-                const params = {
-                    TableName: process.env.DYNAMODB_TABLE,
-                    Item: {
-                        Name: headline,
-                        Description: caption,
-                        Categories: special_instructions && special_instructions.split(',')
-                    }
-                };
-                return dynamodb.put(params).promise();
-            })
-            .then(() => {
-                logger.debug('Image Metadata Saved to Table', process.env.DYNAMODB_TABLE);
-                return data;
-            });
+            .then(() => data);
     };
 }
 
@@ -70,8 +58,22 @@ export function postprocess(event) {
             .then(resizeAndSave(1024, key))
             .then(resizeAndSave(640, key))
             .then(resizeAndSave(320, key))
-
-            .then(() => logger.info('Successfully Saved Image', key))
+            .then((data) => {
+                logger.debug('Image Saved to target bucket', key);
+                const { headline, caption, special_instructions } = data.iptcMetadata;
+                const params = {
+                    TableName: process.env.DYNAMODB_TABLE,
+                    Item: {
+                        Name: headline,
+                        Description: caption,
+                        URLs: getTargetURLs([1024, 640, 320], key),
+                        Categories: special_instructions && special_instructions.split(',')
+                    }
+                };
+                return dynamodb.put(params).promise();
+            })
+            
+            .then(() => logger.debug('Image Metadata Saved to Table', process.env.DYNAMODB_TABLE))
             .catch(err => logger.error(err, err.stack));
     });
 }
