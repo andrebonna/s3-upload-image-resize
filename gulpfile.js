@@ -2,10 +2,11 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const clean = require('gulp-clean');
 const sourceTranspile = [
-    'src/**/*',
+    'src/**/*.js',
     '!src/**/*.spec.js', 
     '!src/**/*.spec.js.snap', 
-    '!src/**/__snapshots__'
+    '!src/**/__snapshots__',
+    '!src/**/__mocks__'
 ];
 const dest = 'build';
 
