@@ -17,7 +17,7 @@ DYNAMODB_TABLE: # DynamoDB Table to save metadata
 
 ## Deploy
 ```
-SOURCE_BUCKET_NAME=<path-to-your-source-s3-bucket> TARGET_BUCKET_NAME=<path-to-your-target-s3-bucket> npm run deploy
+DYNAMODB_TABLE=<name-of-metadata-table> SOURCE_BUCKET_NAME=<path-to-your-source-s3-bucket> TARGET_BUCKET_NAME=<path-to-your-target-s3-bucket> npm run deploy
 ```
 
 
