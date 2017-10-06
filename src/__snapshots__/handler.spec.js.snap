@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`S3 Upload create handler successfully 1`] = `
+Array [
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked",
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload create handler successfully 2`] = `
+Array [
+  Array [
+    Object {
+      "Item": Object {
+        "Categories": Array [
+          "nature",
+          "urban",
+        ],
+        "Description": "bisse le bissè",
+        "Name": "keyMocked",
+        "Title": "Teste malucão de título",
+        "URLs": Array [
+          "https://s3.amazonaws.com/undefined/keyMocked-1024.png",
+          "https://s3.amazonaws.com/undefined/keyMocked-640.png",
+          "https://s3.amazonaws.com/undefined/keyMocked-320.png",
+        ],
+      },
+      "TableName": undefined,
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload create handler with DynamoDB put error 1`] = `
+Array [
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked",
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload create handler with DynamoDB put error 2`] = `
+Array [
+  Array [
+    Object {
+      "Item": Object {
+        "Categories": Array [
+          "nature",
+          "urban",
+        ],
+        "Description": "bisse le bissè",
+        "Name": "keyMocked",
+        "Title": "Teste malucão de título",
+        "URLs": Array [
+          "https://s3.amazonaws.com/undefined/keyMocked-1024.png",
+          "https://s3.amazonaws.com/undefined/keyMocked-640.png",
+          "https://s3.amazonaws.com/undefined/keyMocked-320.png",
+        ],
+      },
+      "TableName": undefined,
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload create handler with S3 getObject error 1`] = `
+Array [
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked",
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload create handler with S3 getObject error 2`] = `Array []`;
+
+exports[`S3 Upload create handler with S3 putObject error 1`] = `
+Array [
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked",
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload create handler with S3 putObject error 2`] = `Array []`;
+
+exports[`S3 Upload remove handler successfully 1`] = `
+Array [
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked-1024.png",
+    },
+  ],
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked-640.png",
+    },
+  ],
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked-320.png",
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload remove handler successfully 2`] = `
+Array [
+  Array [
+    Object {
+      "Key": Object {
+        "Name": "keyMocked",
+      },
+      "TableName": undefined,
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload remove handler with DynamoDB delete error 1`] = `
+Array [
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked-1024.png",
+    },
+  ],
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked-640.png",
+    },
+  ],
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked-320.png",
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload remove handler with DynamoDB delete error 2`] = `
+Array [
+  Array [
+    Object {
+      "Key": Object {
+        "Name": "keyMocked",
+      },
+      "TableName": undefined,
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload remove handler with S3 deleteObject error 1`] = `
+Array [
+  Array [
+    Object {
+      "Bucket": undefined,
+      "Key": "keyMocked-1024.png",
+    },
+  ],
+]
+`;
+
+exports[`S3 Upload remove handler with S3 deleteObject error 2`] = `Array []`;

@@ -86,6 +86,7 @@ function deleteMetadata(key) {
 }
 
 export function create(event) {
+    const promiseBatch = [];
     event.Records.forEach((record) => {
         const {
             object: {
@@ -99,18 +100,22 @@ export function create(event) {
             promise = promise.then(resizeAndPutS3Object(width, key));
         }
 
-        promise
-            .then((data) => {
-                logger.info('Image Saved to target bucket', key);
-                return data;
-            })
-            .then((data) => saveMetadata(data, key))
-            .then(() => logger.info('Image Metadata Saved to Table', process.env.DYNAMODB_TABLE))
-            .catch(err => logger.error(err, err.stack));
+        promiseBatch.push(
+            promise
+                .then((data) => {
+                    logger.info('Image Saved to target bucket', key);
+                    return data;
+                })
+                .then((data) => saveMetadata(data, key))
+                .then(() => logger.info('Image Metadata Saved to Table', process.env.DYNAMODB_TABLE))
+                .catch(err => logger.error(err, err.stack))
+        );
     });
+    return Promise.all(promiseBatch);
 }
 
 export function remove(event) {
+    const promiseBatch = [];
     event.Records.forEach((record) => {
         const {
             object: {
@@ -124,10 +129,13 @@ export function remove(event) {
             promise = promise.then(removeS3Object(width, key));
         }
 
-        promise
-            .then(() => logger.info('Image Remove from target bucket', key))
-            .then(() => deleteMetadata(key))
-            .then(() => logger.info('Image Metadata Removed from Table', process.env.DYNAMODB_TABLE))
-            .catch(err => logger.error(err, err.stack));
+        promiseBatch.push(
+            promise
+                .then(() => logger.info('Image Remove from target bucket', key))
+                .then(() => deleteMetadata(key))
+                .then(() => logger.info('Image Metadata Removed from Table', process.env.DYNAMODB_TABLE))
+                .catch(err => logger.error(err, err.stack))
+        );
     });
+    return Promise.all(promiseBatch);
 }

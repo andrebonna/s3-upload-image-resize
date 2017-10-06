@@ -1,6 +1,8 @@
 # package directories
 node_modules
 build
+coverage
+test-report.xml
 
 # Serverless directories
 .serverless
