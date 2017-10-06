@@ -100,7 +100,10 @@ export function create(event) {
         }
 
         promise
-            .then(() => logger.info('Image Saved to target bucket', key))
+            .then((data) => {
+                logger.info('Image Saved to target bucket', key);
+                return data;
+            })
             .then((data) => saveMetadata(data, key))
             .then(() => logger.info('Image Metadata Saved to Table', process.env.DYNAMODB_TABLE))
             .catch(err => logger.error(err, err.stack));
