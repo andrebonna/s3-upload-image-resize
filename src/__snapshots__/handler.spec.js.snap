@@ -17,12 +17,12 @@ Array [
     Object {
       "Item": Object {
         "Categories": Array [
-          "nature",
-          "urban",
+          "Nature",
+          "Black and White",
         ],
-        "Description": "bisse le bissè",
+        "Description": "Test Description",
         "Name": "keyMocked",
-        "Title": "Teste malucão de título",
+        "Title": "Test Title",
         "URLs": Array [
           "https://s3.amazonaws.com/undefined/keyMocked-1024.png",
           "https://s3.amazonaws.com/undefined/keyMocked-640.png",
@@ -52,12 +52,12 @@ Array [
     Object {
       "Item": Object {
         "Categories": Array [
-          "nature",
-          "urban",
+          "Nature",
+          "Black and White",
         ],
-        "Description": "bisse le bissè",
+        "Description": "Test Description",
         "Name": "keyMocked",
-        "Title": "Teste malucão de título",
+        "Title": "Test Title",
         "URLs": Array [
           "https://s3.amazonaws.com/undefined/keyMocked-1024.png",
           "https://s3.amazonaws.com/undefined/keyMocked-640.png",
